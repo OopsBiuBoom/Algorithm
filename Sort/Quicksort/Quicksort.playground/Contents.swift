@@ -13,22 +13,21 @@ func Quicksort(arr: [Int]) -> [Int] {
     //
     var lowArr = [Int]()
     var heightArr = [Int]()
+    var midArr = [Int]()
     
-    // 待排序数组
-    var beSortedArr = arr
-    beSortedArr.remove(at: midIndex)
-    
-    // 如果数组里的数比基准值小，就放lowArr，否则放heightArr
-    for c in beSortedArr {
+    // 如果数组里的数比基准值小，就放lowArr，相等就放入midArr，否则放heightArr
+    for c in arr {
         if c < mid {
             lowArr.append(c)
+        } else if c == mid {
+            midArr.append(c)
         } else {
             heightArr.append(c)
         }
     }
     
     // 规模不断减小，分治法
-    return Quicksort(arr: lowArr) + [mid] + Quicksort(arr: heightArr)
+    return Quicksort(arr: lowArr) + midArr + Quicksort(arr: heightArr)
 }
 
 // 测试
