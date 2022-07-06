@@ -61,13 +61,9 @@ class BTree<T> {
             // 输出
             print(node.data ?? "")
             // 如果当前节点有左节点，就添加
-            if let leftNode = node.left {
-                queue.append(leftNode)
-            }
+            if let leftNode = node.left { queue.append(leftNode) }
             // 如果当前节点有右节点，就添加
-            if let rightNode = node.right {
-                queue.append(rightNode)
-            }
+            if let rightNode = node.right { queue.append(rightNode) }
         }
     }
     
