@@ -53,16 +53,39 @@ class BTree<T> {
     func layerTraverse() {
         guard let root = root else { return }
         var queue = [Node<T>]()
+        // 加入根节点
         queue.append(root)
         while (!queue.isEmpty) {
+            // 出队
             let node = queue.removeFirst()
+            // 输出
             print(node.data ?? "")
+            // 如果当前节点有左节点，就添加
             if let leftNode = node.left {
                 queue.append(leftNode)
             }
+            // 如果当前节点有右节点，就添加
             if let rightNode = node.right {
                 queue.append(rightNode)
             }
+        }
+    }
+    
+    /// 先序遍历：迭代
+    func firstTraverseIterate() {
+        var stack = [Node<T>]()
+        var node = self.root
+        guard let pnode = node else { return }
+        // 加入根节点
+        stack.append(pnode)
+        while !stack.isEmpty {
+            // 出栈
+            node = stack.removeLast()
+            print("\(String(describing: node?.data))")
+            // 如果当前节点有右节点，就添加
+            if let rightNode = node?.right { stack.append(rightNode) }
+            // 如果当前节点有左节点，就添加
+            if let leftNode = node?.left { stack.append(leftNode) }
         }
     }
 }
@@ -98,13 +121,15 @@ func creatTree() -> BTree<Int> {
 
 
 let tree = creatTree()
-print("先序遍历")
+print("先序遍历-递归")
 tree.firstTraverse(node: tree.root)
-print("中序遍历")
-tree.midTraverse(node: tree.root)
-print("后序遍历")
-tree.lastTraverse(node: tree.root)
-print("层序遍历")
-tree.layerTraverse()
+print("先序遍历-遍历")
+tree.firstTraverseIterate()
+//print("中序遍历")
+//tree.midTraverse(node: tree.root)
+//print("后序遍历")
+//tree.lastTraverse(node: tree.root)
+//print("层序遍历")
+//tree.layerTraverse()
 
 
