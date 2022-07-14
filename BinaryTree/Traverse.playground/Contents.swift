@@ -70,7 +70,7 @@ class BTree<T> {
     /// 先序遍历：迭代
     func firstTraverseIterate() {
         var stack = [Node<T>]()
-        var node = self.root
+        var node = root
         guard let pNode = node else { return }
         // 加入根节点
         stack.append(pNode)
@@ -88,7 +88,7 @@ class BTree<T> {
     /// 中序遍历：迭代
     func midTraverseIterate() {
         var stack = [Node<T>]()
-        var pNode = self.root
+        var pNode = root
         // 只有遍历到最后一个节点 或者 栈为空时，才停止遍历
         while pNode != nil || !stack.isEmpty {
             if let tNode = pNode {
