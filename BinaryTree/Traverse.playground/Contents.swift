@@ -71,9 +71,9 @@ class BTree<T> {
     func firstTraverseIterate() {
         var stack = [Node<T>]()
         var node = self.root
-        guard let pnode = node else { return }
+        guard let pNode = node else { return }
         // 加入根节点
-        stack.append(pnode)
+        stack.append(pNode)
         while !stack.isEmpty {
             // 出栈
             node = stack.removeLast()
@@ -82,6 +82,25 @@ class BTree<T> {
             if let rightNode = node?.right { stack.append(rightNode) }
             // 如果当前节点有左节点，就添加
             if let leftNode = node?.left { stack.append(leftNode) }
+        }
+    }
+    
+    /// 中序遍历：迭代
+    func midTraverseIterate() {
+        var stack = [Node<T>]()
+        var pNode = self.root
+        // 只有遍历到最后一个节点 或者 栈为空时，才停止遍历
+        while pNode != nil || !stack.isEmpty {
+            if let tNode = pNode {
+                // 持续遍历左子树
+                stack.append(tNode)
+                pNode = tNode.left
+            } else {
+                // 输出，并遍历右子树
+                let tNode = stack.removeLast()
+                print("\(String(describing: tNode.data))")
+                pNode = tNode.right
+            }
         }
     }
 }
@@ -121,8 +140,10 @@ print("先序遍历-递归")
 tree.firstTraverse(node: tree.root)
 print("先序遍历-遍历")
 tree.firstTraverseIterate()
-//print("中序遍历")
-//tree.midTraverse(node: tree.root)
+print("中序遍历-递归")
+tree.midTraverse(node: tree.root)
+print("中序遍历-迭代")
+tree.midTraverseIterate()
 //print("后序遍历")
 //tree.lastTraverse(node: tree.root)
 //print("层序遍历")
